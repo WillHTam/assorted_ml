@@ -1,0 +1,71 @@
+.App {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-family: arial;
+  flex-direction: column;
+}
+
+.ribbon {
+  position: absolute; 
+  top: 0; 
+  right: 0; 
+  border: 0;
+}
+
+.main {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  font-family: arial;
+  flex-direction: column;
+}
+
+.thirtee {
+    color: steelblue;
+}
+.prices {
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+.increased {
+  color: #00f1a1;
+}
+.decreased {
+  color: red;
+}
+.spacer {
+  flex: 1;
+}
+.titlebar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 15px;
+}
+.container {
+  flex: 1;
+  display: flex;
+}
+.chart {
+  width: 800px;
+  height: 500px;
+  background-color: #27273f;
+  color: white;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
