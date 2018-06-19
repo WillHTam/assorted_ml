@@ -35,3 +35,5 @@ print('tensorflow: {}'.format(tensorflow.__version__))
 # xgboost
 import xgboost
 print('xgboost: {}'.format(xgboost.__version__))
+import spacy
+print('spaCy: {}'.format(spacy.__version__))
