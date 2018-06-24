@@ -118,3 +118,38 @@ predictions = classifier.predict(input_fn=predict_input_fn)
   - Keep in mind what you think your data should look like.
   - Verify that the data meets these expectations (or that you can explain why it doesn’t).
   - Double-check that the training data agrees with other sources (for example, dashboards).  
+
+## Feature Crosses
+
+- Define a new synthetic feature, a feature cross
+  - This new feature is a product of two other features, and can enable nonlinear learning in a linear learner.
+    - Important because linear learners scale well with big datasets (vowpal-wabit, sofia-ml)
+  - For example a feature cross between number of rooms, binned latitude and binned longitude, would make it clear to the model that there is a difference between three rooms in San Francisco vs Fresno, and other cities
+  - For example in tic-tac-toe, would allow for the use of top-right, btm-left etc coordinates to the model
+- Kinds of feature crosses
+  - We can create many different kinds of feature crosses. For example:
+  - [A X B]: a feature cross formed by multiplying the values of two features.
+  - [A x B x C x D x E]: a feature cross formed by multiplying the values of five features.
+  - [A x A]: a feature cross formed by squaring a single feature.  
+  - Thanks to stochastic gradient descent, linear models can be trained efficiently. Consequently, supplementing scaled linear models with feature crosses has traditionally been an efficient way to train on massive-scale data sets.
+- Crossing One-Hot Vectors
+  - In practice, machine learning models seldom cross continuous features. However, machine learning models do frequently cross one-hot feature vectors. Think of feature crosses of one-hot feature vectors as logical conjunctions. For example, suppose we have two features: country and language. A one-hot encoding of each generates vectors with binary features that can be interpreted as `country=USA, country=France or language=English, language=Spanish`. Then, if you do a feature cross of these one-hot encodings, you get binary features that can be interpreted as logical conjunctions, such as: `country:usa AND language:spanish`.
+
+```txt
+As another example, suppose you bin latitude and longitude, producing separate one-hot five-element feature vectors. For instance, a given latitude and longitude could be represented as follows:
+
+  binned_latitude = [0, 0, 0, 1, 0]
+  binned_longitude = [0, 1, 0, 0, 0]
+
+Suppose you create a feature cross of these two feature vectors:
+
+  binned_latitude X binned_longitude
+  
+This feature cross is a 25-element one-hot vector (24 zeroes and 1 one). The single 1 in the cross identifies a particular conjunction of latitude and longitude. Your model can then learn particular associations about that conjunction.
+```
+
+- Now suppose our model needs to predict how satisfied dog owners will be with dogs based on two features:
+  - Behavior type (barking, crying, snuggling, etc.)
+  - Time of day
+  - Build the feature [behavior x time of day]
+    - This results with vastly more predictive ability than either feature on its own. For example, if a dog cries (happily) at 5:00 pm when the owner returns from work will likely be a great positive predictor of owner satisfaction. Crying (miserably, perhaps) at 3:00 am when the owner was sleeping soundly will likely be a strong negative predictor of owner satisfaction.
