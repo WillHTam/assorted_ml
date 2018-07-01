@@ -153,3 +153,17 @@ This feature cross is a 25-element one-hot vector (24 zeroes and 1 one). The sin
   - Time of day
   - Build the feature [behavior x time of day]
     - This results with vastly more predictive ability than either feature on its own. For example, if a dog cries (happily) at 5:00 pm when the owner returns from work will likely be a great positive predictor of owner satisfaction. Crying (miserably, perhaps) at 3:00 am when the owner was sleeping soundly will likely be a strong negative predictor of owner satisfaction.
+
+- Embeddings in a Deep Network
+    - No separate training process needed - the embedding layer is just one hidden layer with one unit per dimension 
+        - A two dimensional model would be for example, arthouse vs blockbuster on one axis, and for children vs for adults on another
+    - Supervised learning (eg a user watching two movies suggests some sort of relationship between them) tailors the learned embeddings for the desired task
+    - Intuitively the hidden units discover how to organize the items in the d-dimensional space in a way to best optimize the final objective
+    
+- Input Representation
+    - One-hot encoding is not recommended, very time-intensive
+    - Instead, build a dictionary mapping each feature to an integer from 0...-1
+    - Efficiently represent the sparse vector as just the movies the user watched
+        - {1, 3, 99999}
+    
+
