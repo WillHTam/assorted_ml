@@ -155,15 +155,32 @@ This feature cross is a 25-element one-hot vector (24 zeroes and 1 one). The sin
     - This results with vastly more predictive ability than either feature on its own. For example, if a dog cries (happily) at 5:00 pm when the owner returns from work will likely be a great positive predictor of owner satisfaction. Crying (miserably, perhaps) at 3:00 am when the owner was sleeping soundly will likely be a strong negative predictor of owner satisfaction.
 
 - Embeddings in a Deep Network
+    - Solves the core problems of sparse input data by mapping high-dimensional data into a lower-dimensional space
     - No separate training process needed - the embedding layer is just one hidden layer with one unit per dimension 
-        - A two dimensional model would be for example, arthouse vs blockbuster on one axis, and for children vs for adults on another
+        - A two dimensional model would be for example, arthouse vs blockbuster on one axis, and for children vs for adults on another. This is mapping movies into an **embedding space**, where each word is described by a two-dimensional set of coordinates. In general, when learning a d-dimensional embedding, each movei is represented by d real-valued numbers, each one giving the coordinate in one dimension.
+        - Therefore, two similar movies would be vectors that are close to each other
+        - latent dimesions arise in learning embeddings, represeting a feature that is not explicit in teh data but rather inferred from it
     - Supervised learning (eg a user watching two movies suggests some sort of relationship between them) tailors the learned embeddings for the desired task
     - Intuitively the hidden units discover how to organize the items in the d-dimensional space in a way to best optimize the final objective
-    
-- Input Representation
+    - Each hidden unit corresponds to a dimension
+    - Edge weights between a movie and hidden layer are coordinate values    
+
+- **Embeddings Dim**
+    - Higher-dimensional embeddings can more accurately represent the relationships between input values
+    - But more dimensions increases the chance of overfitting and leads to slower training
+    - **Empirical rule-of-thumb starting point**
+        - `dimensions = (possible values) ** (1. / 4.)`
+        
+- Embeddings as a tool
+    - Embddings can be leared as part of the neural network for the target
+    - Embeddings map items (eg movies, text) to low-dimensional real vectors in a way that similar items are lose to each other
+    - Embeddings can also be appleid to dense data (audio) to create a meaningful similarity metric
+    - Jointly embedding diverse data types (text, images, audio) define a similarity between them
+
+- Input Representation for Categorical Data
+    - Categorical data is input features that represent one or more discrete items from a finite set of choices
+        - Categorical data is most efficiently represented via sparse tensors, which are tensors with very few non-zero elements
     - One-hot encoding is not recommended, very time-intensive
     - Instead, build a dictionary mapping each feature to an integer from 0...-1
     - Efficiently represent the sparse vector as just the movies the user watched
         - {1, 3, 99999}
-    
-
