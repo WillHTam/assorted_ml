@@ -37,3 +37,5 @@ import xgboost
 print('xgboost: {}'.format(xgboost.__version__))
 import spacy
 print('spaCy: {}'.format(spacy.__version__))
+import torch
+print('torch: {}'.format(torch.__version__))
